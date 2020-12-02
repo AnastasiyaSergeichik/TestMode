@@ -18,7 +18,7 @@ public class AuthTest {
     void setUp() {
         open("http://localhost:9999");
         form = $("[action]");
-           }
+    }
 
     @Test
     void shouldSubmitRequestUserStatusActive() {

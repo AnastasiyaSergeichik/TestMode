@@ -13,12 +13,12 @@ import static io.restassured.RestAssured.given;
 public class DataGenerator {
 
     private static RequestSpecification requestSpec = new RequestSpecBuilder()
-                .setBaseUri("http://localhost")
-                .setPort(9999)
-                .setAccept(ContentType.JSON)
-                .setContentType(ContentType.JSON)
-                .log(LogDetail.ALL)
-                .build();
+            .setBaseUri("http://localhost")
+            .setPort(9999)
+            .setAccept(ContentType.JSON)
+            .setContentType(ContentType.JSON)
+            .log(LogDetail.ALL)
+            .build();
 
 
     public static RegistrationUser getNewUser(String status) {
@@ -37,7 +37,8 @@ public class DataGenerator {
 
         return registrationUser;
     }
-    public static RegistrationUser generate (String status) {
+
+    public static RegistrationUser generate(String status) {
         Faker faker = new Faker(new Locale("en"));
         return new RegistrationUser(
                 faker.name().firstName(),
