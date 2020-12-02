@@ -31,7 +31,6 @@ public class AuthTest {
 
     @Test
     void shouldSubmitRequestUserStatusBlocked() {
-
         RegistrationUser registrationUser = DataGenerator.getNewUser("blocked");
         form.$("[data-test-id=login] input").setValue(registrationUser.getLogin());
         form.$("[data-test-id=password] input").setValue(registrationUser.getPassword());
@@ -42,8 +41,6 @@ public class AuthTest {
 
     @Test
     void shouldSubmitRequestInvalidLogin() {
-
-
         RegistrationUser registrationUser = DataGenerator.getNewUser("active");
         form.$("[data-test-id=login] input").setValue(faker.name().firstName());
         form.$("[data-test-id=password] input").setValue(registrationUser.getPassword());
@@ -54,7 +51,6 @@ public class AuthTest {
 
     @Test
     void shouldSubmitRequestInvalidPassword() {
-
         RegistrationUser registrationUser = DataGenerator.getNewUser("active");
         form.$("[data-test-id=login] input").setValue(registrationUser.getLogin());
         form.$("[data-test-id=password] input").setValue(faker.internet().password());
