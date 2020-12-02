@@ -1,7 +1,10 @@
 package ru.netology;
 
 import com.github.javafaker.Faker;
-import jdk.jfr.ContentType;
+import io.restassured.builder.RequestSpecBuilder;
+import io.restassured.filter.log.LogDetail;
+import io.restassured.http.ContentType;
+import io.restassured.specification.RequestSpecification;
 
 import java.util.Locale;
 
@@ -9,13 +12,13 @@ import static io.restassured.RestAssured.given;
 
 public class DataGenerator {
 
-        private static RequestSpecification requestSpec = new RequestSpecBuilder()
-            .setBaseUri("http://localhost")
-            .setPort(9999)
-            .setAccept(ContentType.JSON)
-            .setContentType(ContentType.JSON)
-            .log(LogDetail.ALL)
-            .build();
+    private static RequestSpecification requestSpec = new RequestSpecBuilder()
+                .setBaseUri("http://localhost")
+                .setPort(9999)
+                .setAccept(ContentType.JSON)
+                .setContentType(ContentType.JSON)
+                .log(LogDetail.ALL)
+                .build();
 
 
     public static RegistrationUser getNewUser(String status) {
@@ -34,15 +37,13 @@ public class DataGenerator {
 
         return registrationUser;
     }
-    public static RegistrationUser generate(String status) {
+    public static RegistrationUser generate (String status) {
         Faker faker = new Faker(new Locale("ru"));
         return new RegistrationUser(
                 faker.name().firstName(),
                 faker.internet().password(),
                 status
         );
-
     }
-
 }
 
