@@ -20,7 +20,6 @@ public class DataGenerator {
             .log(LogDetail.ALL)
             .build();
 
-
     public static RegistrationUser getNewUser(String status) {
         Faker faker = new Faker(new Locale("en"));
 
