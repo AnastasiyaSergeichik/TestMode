@@ -1,1 +1,1 @@
-[![Build status](https://ci.appveyor.com/api/projects/status/nsjlltk2qyxluoiq?svg=true)](https://ci.appveyor.com/project/AnastasiyaSergeichik/carddeliverynewdate)
+[![Build status](https://ci.appveyor.com/api/projects/status/jxuix6qxjctegt3k?svg=true)](https://ci.appveyor.com/project/AnastasiyaSergeichik/testmode)
