@@ -33,7 +33,6 @@ public class DataGenerator {
                 .post("/api/system/users") // на какой путь, относительно BaseUri отправляем запрос
                 .then() // "тогда ожидаем"
                 .statusCode(200); // код 200 OK
-
         return registrationUser;
     }
 }
