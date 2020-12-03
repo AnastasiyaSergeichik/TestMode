@@ -36,14 +36,5 @@ public class DataGenerator {
 
         return registrationUser;
     }
-
-    public static RegistrationUser generate(String status) {
-        Faker faker = new Faker(new Locale("en"));
-        return new RegistrationUser(
-                faker.name().firstName(),
-                faker.internet().password(),
-                status
-        );
-    }
 }
 
