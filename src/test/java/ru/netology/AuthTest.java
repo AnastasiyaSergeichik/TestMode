@@ -1,18 +1,17 @@
 package ru.netology;
 
+import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.SelenideElement;
-import com.github.javafaker.Faker;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import static com.codeborne.selenide.Condition.exactText;
 import static com.codeborne.selenide.Condition.exist;
+import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selenide.*;
-import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class AuthTest {
     SelenideElement form = $(".form");
-    Faker faker = new Faker();
 
     @BeforeEach
     void setUp() {
@@ -22,7 +21,7 @@ public class AuthTest {
 
     @Test
     void shouldSubmitRequestUserStatusActive() {
-        RegistrationUser registrationUser = DataGenerator.getNewUser("active");
+        RegistrationUser registrationUser = DataGenerator.generateUserStatusActive();
         form.$("[data-test-id=login] input").setValue(registrationUser.getLogin());
         form.$("[data-test-id=password] input").setValue(registrationUser.getPassword());
         $$(".button").find(exactText("Продолжить")).click();
@@ -31,31 +30,28 @@ public class AuthTest {
 
     @Test
     void shouldSubmitRequestUserStatusBlocked() {
-        RegistrationUser registrationUser = DataGenerator.getNewUser("blocked");
+        RegistrationUser registrationUser = DataGenerator.generateUserStatusBlocked();
         form.$("[data-test-id=login] input").setValue(registrationUser.getLogin());
         form.$("[data-test-id=password] input").setValue(registrationUser.getPassword());
         $$(".button").find(exactText("Продолжить")).click();
-        String successText = $("[data-test-id=error-notification]").getText();
-        assertEquals("Ошибка\nОшибка! Пользователь заблокирован", successText);
+        $(byText("Ошибка")).waitUntil(Condition.visible, 15000);
     }
 
     @Test
     void shouldSubmitRequestInvalidLogin() {
-        RegistrationUser registrationUser = DataGenerator.getNewUser("active");
-        form.$("[data-test-id=login] input").setValue(faker.name().firstName());
+        RegistrationUser registrationUser = DataGenerator.generateUserInvalidLogin();
+        form.$("[data-test-id=login] input").setValue(registrationUser.getLogin());
         form.$("[data-test-id=password] input").setValue(registrationUser.getPassword());
         $$(".button").find(exactText("Продолжить")).click();
-        String successText = $("[data-test-id=error-notification]").getText();
-        assertEquals("Ошибка\nОшибка! Неверно указан логин или пароль", successText);
+        $(byText("Ошибка")).waitUntil(Condition.visible, 15000);
     }
 
     @Test
     void shouldSubmitRequestInvalidPassword() {
-        RegistrationUser registrationUser = DataGenerator.getNewUser("active");
+        RegistrationUser registrationUser = DataGenerator.generateNewUserInvalidPassword();
         form.$("[data-test-id=login] input").setValue(registrationUser.getLogin());
-        form.$("[data-test-id=password] input").setValue(faker.internet().password());
+        form.$("[data-test-id=password] input").setValue(registrationUser.getPassword());
         $$(".button").find(exactText("Продолжить")).click();
-        String successText = $("[data-test-id=error-notification]").getText();
-        assertEquals("Ошибка\nОшибка! Неверно указан логин или пароль", successText);
+        $(byText("Ошибка")).waitUntil(Condition.visible, 15000);
     }
 }
