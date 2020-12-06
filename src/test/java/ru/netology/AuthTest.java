@@ -7,7 +7,6 @@ import org.junit.jupiter.api.Test;
 
 import static com.codeborne.selenide.Condition.exactText;
 import static com.codeborne.selenide.Condition.exist;
-import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selenide.*;
 
 public class AuthTest {
@@ -34,7 +33,8 @@ public class AuthTest {
         form.$("[data-test-id=login] input").setValue(registrationUser.getLogin());
         form.$("[data-test-id=password] input").setValue(registrationUser.getPassword());
         $$(".button").find(exactText("Продолжить")).click();
-        $(byText("Ошибка")).waitUntil(Condition.visible, 15000);
+        $(".notification_status_error").waitUntil(Condition.visible, 15000);
+        $(".notification_visible[data-test-id=error-notification]").shouldHave(Condition.matchesText("Ошибка! Пользователь заблокирован"));
     }
 
     @Test
@@ -43,7 +43,8 @@ public class AuthTest {
         form.$("[data-test-id=login] input").setValue(registrationUser.getLogin());
         form.$("[data-test-id=password] input").setValue(registrationUser.getPassword());
         $$(".button").find(exactText("Продолжить")).click();
-        $(byText("Ошибка")).waitUntil(Condition.visible, 15000);
+        $(".notification_status_error").waitUntil(Condition.visible, 15000);
+        $(".notification_visible[data-test-id=error-notification]").shouldHave(Condition.matchesText("Ошибка! Неверно указан логин или пароль"));
     }
 
     @Test
@@ -52,6 +53,7 @@ public class AuthTest {
         form.$("[data-test-id=login] input").setValue(registrationUser.getLogin());
         form.$("[data-test-id=password] input").setValue(registrationUser.getPassword());
         $$(".button").find(exactText("Продолжить")).click();
-        $(byText("Ошибка")).waitUntil(Condition.visible, 15000);
+        $(".notification_status_error").waitUntil(Condition.visible, 15000);
+        $(".notification_visible[data-test-id=error-notification]").shouldHave(Condition.matchesText("Ошибка! Неверно указан логин или пароль"));
     }
 }

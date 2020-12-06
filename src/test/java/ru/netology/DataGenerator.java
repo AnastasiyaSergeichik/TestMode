@@ -13,6 +13,11 @@ import java.util.Locale;
 @Data
 public class DataGenerator {
 
+    private static Faker faker = new Faker(new Locale("en"));
+
+    private DataGenerator() {
+    }
+
     private static RequestSpecification requestSpec = new RequestSpecBuilder()
             .setBaseUri("http://localhost")
             .setPort(9999)
@@ -32,7 +37,6 @@ public class DataGenerator {
     }
 
     public static RegistrationUser generateUserStatusActive() {
-        Faker faker = new Faker(new Locale("en"));
         String login = faker.name().firstName();
         String password = faker.internet().password();
         makeRegistration(new RegistrationUser(login, password, "active"));
@@ -41,32 +45,24 @@ public class DataGenerator {
     }
 
     public static RegistrationUser generateUserStatusBlocked() {
-        Faker faker = new Faker(new Locale("en"));
         String login = faker.name().firstName();
         String password = faker.internet().password();
         makeRegistration(new RegistrationUser(login, password, "blocked"));
         return new RegistrationUser(login, password, "blocked");
     }
 
-
     public static RegistrationUser generateUserInvalidLogin() {
-        Faker faker = new Faker(new Locale("en"));
-       // String login = faker.name().firstName();
         String password = faker.internet().password();
         String status = "active";
         makeRegistration(new RegistrationUser("Anastasiia", password, status));
         return new RegistrationUser("InvalidLogin", password, status);
     }
 
-
     public static RegistrationUser generateNewUserInvalidPassword() {
-        Faker faker = new Faker(new Locale("en"));
         String login = faker.name().firstName();
-        String password = faker.internet().password();
         String status = "active";
         makeRegistration(new RegistrationUser(login, "fgf5//56dhjj", status));
         return new RegistrationUser(login, "InvalidPassword", status);
     }
-
 }
 
